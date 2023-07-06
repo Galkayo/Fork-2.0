@@ -1,0 +1,78 @@
+import pygame
+from pygame.locals import *
+
+
+pygame.init()
+
+screen_width = 800
+screen_height = 600
+screen = pygame.display.set_mode((screen_width, screen_height))
+pygame.display.set_caption("interactive screen")
+
+# Load image and resize it
+image = pygame.image.load("Duck.png")
+image = pygame.transform.scale(image, (500, 300))  # Adjust the dimensions as needed
+
+# Define the button rectangle (adjust the values as needed)
+button_width = 500
+button_height = 300
+image_x = (screen_width - button_width) // 2
+image_y = (screen_height - button_height) // 2
+button_rect = pygame.Rect(image_x, image_y, button_width, button_height)
+ 
+
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            running = False
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:  # Left mouse button
+                mouse_pos = pygame.mouse.get_pos()
+                if button_rect.collidepoint(mouse_pos):
+                    print("Button clicked!")
+
+    # Clear the screen and draw the button
+    screen.fill((255, 255, 255))
+    screen.blit(image, (image_x, image_y))
+    pygame.display.flip()
+
+pygame.quit()
+
+import random
+
+array = [
+    "Are you using an IDE like Visual Studio? Those can catch a lot of problems.",
+    "Learn how breakpoints work.",
+    "Print out statements every so often so you can trace through the code and see where the issue is.",
+    "simply press F12 and navigate to the console tab",
+    "This is very helpful to see which part of the code failed.",
+    "I would recommend an advanced text editor like VSCode for writing javascript",
+    "Simplify the code",
+    "Remove calls to functions if you can until you find where it's failing",
+    "If a removed function call makes the rest of the code start working, you know where the trouble is.",
+    "Begin single-stepping through code at a high level and examining results after function calls until you find one that fails.",
+    "do the same thing until you have it narrowed down.",
+    "Simplify the environment",
+    "When applicable, divide and conquer.",
+    "Use print functions to identify where the code is not being read.",
+    "Black magic. Always works. JK.",
+    "Use a debugger.",
+    "Speak with your colleagues.",
+    "Take a break,"
+    
+
+]
+
+def database_pull(click):
+    if array:
+        random_digit = random.choice(array)
+        array.remove(random_digit)  # Remove the selected item from the array
+        return random_digit
+    else:
+        return "Shout at the monitor."
+
+print(database_pull(1))
+
+
+print("This is fuack")
